@@ -78,9 +78,10 @@ export class FieldDetails extends React.PureComponent<FieldProps> {
         {!renderDiscriminatorSwitch && <EnumValues type={schema.type} values={schema.enum} />}{' '}
         {exampleField}
         {<Extensions extensions={{ ...field.extensions, ...schema.extensions }} />}
-        <div>
-          <Markdown compact={true} source={description} />
-        </div>
+        {(schema.isPrimitive || schema.type != 'object') &&
+          <div>
+            <Markdown compact={true} source={description} />
+          </div>}
         {schema.externalDocs && (
           <ExternalDocumentation externalDocs={schema.externalDocs} compact={true} />
         )}
